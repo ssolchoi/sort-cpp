@@ -28,12 +28,22 @@ endif()
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
-file(GLOB SOURCE_FILES src/*.cpp)
+# 라이브러리용 소스 파일들 (main.cpp 제외)
+set(LIBRARY_SOURCE_FILES 
+    src/kalman_filter.cpp
+    src/track.cpp
+    src/tracker.cpp
+    src/munkres.cpp
+)
 
-add_executable(${CMAKE_PROJECT_NAME} ${SOURCE_FILES})
+# sort-cpp 라이브러리 생성
+add_library(sort-cpp STATIC ${LIBRARY_SOURCE_FILES})
 
 target_link_libraries (
-        ${CMAKE_PROJECT_NAME}
+        sort-cpp
         ${OpenCV_LIBS}
         ${Boost_LIBRARIES}
 )
+
+# 헤더 파일들을 다른 타겟에서 사용할 수 있도록 설정
+target_include_directories(sort-cpp PUBLIC ${PROJECT_SOURCE_DIR}/include)

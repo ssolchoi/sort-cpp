@@ -31,7 +31,7 @@ public:
                                        std::map<int, Track>& tracks,
                                        std::map<int, cv::Rect>& matched,
                                        std::vector<cv::Rect>& unmatched_det,
-                                       float iou_threshold = 0.3);
+                                       float iou_threshold = 0.3);  // 0.3 → 0.2로 더 관대하게
 
     void Run(const std::vector<cv::Rect>& detections);
 
